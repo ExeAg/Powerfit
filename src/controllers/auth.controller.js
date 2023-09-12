@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+const { username, email, password, nombreyapellido, edad, DNI } = req.body;
 //import User from '../models/user.model';
 
 export const register = async(req, res) => {

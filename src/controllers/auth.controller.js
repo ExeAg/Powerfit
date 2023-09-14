@@ -1,18 +1,84 @@
-import { Request, Response } from 'express';
-const { username, email, password, nombreyapellido, edad, DNI } = req.body;
-//import User from '../models/user.model';
+import User from "../models/user.model.js";
+import bcrypt from "bcryptjs";
+import { createAccessToken } from "../libs/jwt.js";
 
-export const register = async(req, res) => {
-    try{
-    const newUser = new User({ 
-        username, email, password, nombreyapellido, edad, DNI 
+export const register = async (req, res) => {
+  const { username, email, password, fullname, age, dni } = req.body;
+
+  try {
+    //Encriptando password
+    const passwordHash = await bcrypt.hash(password, 10); //encriptando password
+
+    const newUser = new User({
+      username,
+      email,
+      password: passwordHash,
+      fullname,
+      age,
+      dni,
     });
 
-    await newUser.save();
-    res.send("registrando");
-}   catch (error){
-    console.log(error)
-}
-    };
+    const userSaved = await newUser.save();
+    const token = await createAccessToken({ id: userSaved._id });
+    res.cookie("token", token);
+    res.json({
+      id: userSaved._id,
+      username: userSaved.username,
+      email: userSaved.email,
+      fullname: userSaved.fullname,
+      createdAt: userSaved.createdAt,
+      updatedAt: userSaved.updatedAt,
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 
-export const login = (req, res) => res.send('login');
+export const login = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const userFound = await User.findOne({ email });
+    if (!userFound)
+      return res.status(400).json({ message: "Usuario no encontrado" });
+
+    const isMatch = await bcrypt.compare(password, userFound.password); //encriptando password
+    if (!isMatch)
+      return res.status(400).json({ message: "Credenciales invalidas" });
+
+    const token = await createAccessToken({ id: userFound._id });
+    res.cookie("token", token);
+    res.json({
+      id: userFound._id,
+      username: userFound.username,
+      email: userFound.email,
+      fullname: userFound.fullname,
+      createdAt: userFound.createdAt,
+      updatedAt: userFound.updatedAt,
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const logout = (req, res) => {
+  res.cookie("token", "", {
+    expires: new Date(0),
+  });
+  return res.sendStatus(200);
+};
+
+export const profile = async (req, res) => {
+  const userFound = await User.findById(req.user.id)
+
+  if (!userFound) return res.status(400).json({message: "Usuario no encontrado"});
+
+  return res.json({
+    id: userFound._id,
+    username: userFound.username,
+    email: userFound.email,
+    fullname: userFound.fullname,
+    createdAt: userFound.createdAt,
+    updatedAt: userFound.updatedAt,
+  })
+}

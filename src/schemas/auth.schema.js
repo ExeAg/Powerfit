@@ -22,7 +22,7 @@ export const registerSchema = z.object({
     required_error: "El nombre completo es requerido",
   }),
   age: z
-    .number({
+    .string({
       required_error: "La edad es requerida",
     })
     .min(1, {
@@ -32,7 +32,7 @@ export const registerSchema = z.object({
       message: "Edad inválida",
     }),
   dni: z
-    .number({
+    .string({
       required_error: "El DNI es requerido",
     })
     .refine(

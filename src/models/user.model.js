@@ -22,11 +22,11 @@ const userSchema = new mongoose.Schema(
       require: true,
     },
     age: {
-      type: Number,
+      type: String,
       require: true,
     },
     dni: {
-      type: Number,
+      type: String,
       require: true,
       unique: true,
     },

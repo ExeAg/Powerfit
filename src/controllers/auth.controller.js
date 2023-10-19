@@ -23,8 +23,8 @@ export const register = async (req, res) => {
     });
 
     const userSaved = await newUser.save();
-    const token = await createAccessToken({ id: userSaved._id });
-    res.cookie("token", token);
+    const token = await createAccessToken({ id: userSaved._id });   /// tambien podemos pasar roles
+    res.cookie("token", token);  /// probar con localstorage , pc alejo
     res.json({
       id: userSaved._id,
       username: userSaved.username,

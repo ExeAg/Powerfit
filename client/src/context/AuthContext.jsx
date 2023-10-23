@@ -38,6 +38,7 @@ export const AuthProvider = ({ children }) => {
       setIsAutheticated(true);
       setUser(res.data);
       setRole(res.data.role);
+      socket.emit("user_connected", res.data.username);
     } catch (error) {
       if (Array.isArray(error.response.data)) {
         return setErrors(error.response.data);

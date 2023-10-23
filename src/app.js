@@ -29,13 +29,28 @@ app.use("/api", taskRoutes);
 const server = http.createServer(app);
 const io = new SocketServer(server, {});
 
+const connectedUsers = {}; // Un objeto para almacenar los nombres de usuario de usuarios conectados
+
 io.on("connection", (socket) => {
   console.log(socket.id);
-  socket.on("message", (body) => {
+
+  socket.on("user_connected", (userName) => {
+    connectedUsers[socket.id] = userName; // Asignar el nombre de usuario al socket.id
+  });
+
+  socket.on("message", (message) => {
+    // Obtener el nombre del usuario del objeto connectedUsers
+    const userName = connectedUsers[socket.id];
+
     socket.broadcast.emit("message", {
-      body,
-      from: socket.id.slice(8),
+      body: message,
+      from: userName, // Utilizar el nombre del usuario
     });
+  });
+
+  socket.on("disconnect", () => {
+    // Eliminar al usuario de connectedUsers cuando se desconecte
+    delete connectedUsers[socket.id];
   });
 });
 

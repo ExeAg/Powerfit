@@ -9,6 +9,7 @@ import TaskFormPage from "./pages/TaskFormPage";
 import ProfilePage from "./pages/ProfilePage";
 import AlumnHomePage from "./pages/AlumnHomePage";
 import ProfesorHomePage from "./pages/ProfesorHomePage";
+import ChatPage from "./pages/ChatPage";
 
 import ProtectedRoute from "./ProtectedRoute";
 import { TaskProvider } from "./context/TasksContext";
@@ -25,6 +26,7 @@ function App() {
               <Route path="/" element={<HomePage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/register" element={<RegisterPage />} />
+              <Route path="/chat" element={<ChatPage />}/>
 
               <Route element={<ProtectedRoute />}>
                 <Route path="/tasks" element={<TasksPage />} />

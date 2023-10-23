@@ -30,6 +30,11 @@ const userSchema = new mongoose.Schema(
       require: true,
       unique: true,
     },
+    role: {
+      type: String,
+      enum: ["Admin", "Alumno", "Profesor"],
+      required: true,
+    },
   },
   {
     timestamps: true, //para visualizar la fecha de creacion o modificacion de cada User

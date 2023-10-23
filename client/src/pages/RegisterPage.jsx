@@ -79,7 +79,15 @@ function RegisterPage() {
             placeholder="dni"
           />
           {errors.dni && <p className="text-red-500">dni is required</p>}
+          <select
+            {...register("role", { required: true })}
+            className="w-full bg-zinc-700 text-white px-4 py-2 rounded-md my-4">
+              <option value="Admin">Administrador</option>
+              <option value="Alumno">Alumno</option>
+              <option value="Profesor">Profesor</option>
+          </select>
           <button type="submit" className="bg-green-500 text-white px-4 py-2 rounded-md my-2">Registrar</button>
+          {errors.role && <p className="text-red-500">Role is required</p>}
         </form>
 
         <p className="flex gap-x-2 justify-between">

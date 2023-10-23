@@ -10,7 +10,7 @@ function LoginPage() {
     formState: { errors },
   } = useForm();
 
-  const { signin, errors: signinErrors, isAuthenticated } = useAuth();
+  const { signin, errors: signinErrors, isAuthenticated,role} = useAuth();
   const navigate = useNavigate();
 
   const onSubmit = handleSubmit((data) => {
@@ -18,8 +18,19 @@ function LoginPage() {
   });
 
   useEffect(() => {
-    if (isAuthenticated) navigate("/tasks");
-  }, [isAuthenticated]);
+    if (isAuthenticated) {
+      // Realiza un enrutamiento condicional según el 'role' del usuario
+      if (role === "Admin") {
+        navigate("/tasks");
+      } else if (role === "Alumno") {
+        navigate("/Alumn");
+      } else if (role === "Profesor") {
+        navigate("/Profesor");
+      } else {
+        navigate("/");
+      }
+    }
+  }, [isAuthenticated, role, navigate]);
 
   return (
     <div className="flex h-[calc(100vh-100px)] items-center justify-center">

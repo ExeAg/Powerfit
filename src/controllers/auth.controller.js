@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 import { TOKEN_SECRET } from "../config.js";
 
 export const register = async (req, res) => {
-  const { username, email, password, fullname, age, dni } = req.body;
+  const { username, email, password, fullname, age, dni, role } = req.body;
 
   try {
     const userFound = await User.findOne({ email });
@@ -20,6 +20,7 @@ export const register = async (req, res) => {
       fullname,
       age,
       dni,
+      role,
     });
 
     const userSaved = await newUser.save();
@@ -30,6 +31,7 @@ export const register = async (req, res) => {
       username: userSaved.username,
       email: userSaved.email,
       fullname: userSaved.fullname,
+      role: userSaved.role,
       createdAt: userSaved.createdAt,
       updatedAt: userSaved.updatedAt,
     });
@@ -39,7 +41,7 @@ export const register = async (req, res) => {
 };
 
 export const login = async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, role } = req.body;
 
   try {
     const userFound = await User.findOne({ email });
@@ -64,6 +66,7 @@ export const login = async (req, res) => {
       username: userFound.username,
       email: userFound.email,
       fullname: userFound.fullname,
+      role: userFound.role,
       createdAt: userFound.createdAt,
       updatedAt: userFound.updatedAt,
     });
@@ -89,6 +92,7 @@ export const profile = async (req, res) => {
     id: userFound._id,
     username: userFound.username,
     email: userFound.email,
+    role: userFound.role,
     fullname: userFound.fullname,
     createdAt: userFound.createdAt,
     updatedAt: userFound.updatedAt,
@@ -110,6 +114,7 @@ export const verifyToken = async (req, res) => {
       id: userFound._id,
       username: userFound.username,
       email: userFound.email,
+      role: userFound.role,
     });
   });
 };

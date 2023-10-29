@@ -10,7 +10,7 @@ function CompFormPage() {
   })
 
   return (
-    <div className="flex h-[calc(100vh-100px)] items-center justify-center">
+    <div className="flex h-[calc(100vh-100px)] items-center justify-center"style={{ marginTop: '150px' }}>
       <div className="bg-zinc-800 max-w-md w-full p-10 rounded-md">
         <form onSubmit={onSubmit}>
           <label htmlFor="title">Altura:</label>

@@ -2,8 +2,9 @@ import express from "express";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
 import authRoutes from "./routes/auth.routes.js";
-import taskRoutes from "./routes/tasks.routes.js"
-import cors from 'cors'
+import taskRoutes from "./routes/tasks.routes.js";
+import compRoutes from "./routes/comps.routes.js";
+import cors from 'cors';
 import http from "http";
 import { Server as SocketServer } from "socket.io";
 import { resolve, dirname } from "path";
@@ -25,6 +26,7 @@ app.use(express.static(resolve("/")));
 //Rutas
 app.use("/api", authRoutes); //para que todas las authRoutes empiecen con /api
 app.use("/api", taskRoutes);
+app.use("/api", compRoutes);
 
 const server = http.createServer(app);
 const io = new SocketServer(server, {});

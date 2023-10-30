@@ -5,7 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWeightScale, faPersonArrowUpFromLine, faBurger, faBottleWater, faXRay, faDumbbell, faEgg, faFire, faBone, faCalendarDays } from "@fortawesome/free-solid-svg-icons";
 
 function CompsPage() {
-  const { getComps, comps } = useComps();
+  const { getComps, comps, deleteComp } = useComps();
+
 
   useEffect(() => {
     getComps();
@@ -116,10 +117,10 @@ function CompsPage() {
           </div>
           <div className="flex justify-between">
             <button
-              className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md"
-            //</div>onClick={() => {
-            // Agrega aquí la función para borrar el elemento
-            //}}
+              key={comp._id} className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md"
+              onClick={() => {
+                deleteComp(comp._id);
+              }}
             >
               Borrar
             </button>

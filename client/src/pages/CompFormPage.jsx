@@ -1,16 +1,19 @@
 import { useForm } from "react-hook-form"
 import { useComps } from "../context/CompsContext"
+import { useNavigate } from "react-router-dom";
 
 function CompFormPage() {
   const { register, handleSubmit } = useForm();
   const { createComp } = useComps();
+  const navigate = useNavigate();
 
   const onSubmit = handleSubmit((data) => {
     createComp(data);
+    navigate("/comps");
   })
 
   return (
-    <div className="flex h-[calc(100vh-100px)] items-center justify-center"style={{ marginTop: '150px' }}>
+    <div className="flex h-[calc(100vh-100px)] items-center justify-center" style={{ marginTop: '150px' }}>
       <div className="bg-zinc-800 max-w-md w-full p-10 rounded-md">
         <form onSubmit={onSubmit}>
           <label htmlFor="title">Altura:</label>

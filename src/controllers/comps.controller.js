@@ -9,7 +9,7 @@ export const getComps = async (req, res) => {
 
 export const createComp = async (req, res) => {
     const { altura, peso, grasa, agua, viceral, musculo, proteinas, basal, hueso } = req.body;
-    
+
     console.log(req.user);
     const newComp = new Comp({
         altura,
@@ -35,9 +35,13 @@ export const getComp = async (req, res) => {
 };
 
 export const deleteComp = async (req, res) => {
-    const comp = await Comp.findByIdAndDelete(req.params.id);
-    if (!comp) return res.status(404).json({ message: "Comp not found" });
-    return res.status.sendStatus(204);
+    try {
+        const comp = await Comp.findByIdAndDelete(req.params.id);
+        if (!comp) return res.status(404).json({ message: "Composición no encontrada" });
+        return res.sendStatus(204);
+    } catch (error) {
+        return res.status(404).json({ message: "Comp not found" });
+    }
 };
 
 export const updateComp = async (req, res) => {

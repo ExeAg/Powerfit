@@ -1,6 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import { createCompRequest, getCompsRequest } from "../api/comps";
-import { set } from "mongoose";
+import { createCompRequest, getCompsRequest, deleteCompRequest } from "../api/comps";
 
 const CompContext = createContext();
 
@@ -43,12 +42,22 @@ export function CompProvider({ children }) {
         console.log(res);
     }
 
+    const deleteComp = async (id) => {
+        try {
+            const res = await deleteCompRequest(id);
+            if (res.status === 204) setComps(comps.filter(comp => comp._id !== id));
+        } catch (error) {
+            console.log(res.data);
+        }
+    }
+
     return (
         <CompContext.Provider
             value={{
                 comps,
                 createComp,
                 getComps,
+                deleteComp,
             }}>
             {children}
         </CompContext.Provider>

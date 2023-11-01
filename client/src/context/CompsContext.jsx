@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import { createCompRequest, getCompsRequest, deleteCompRequest } from "../api/comps";
+import { createCompRequest, getCompsRequest, deleteCompRequest, getCompRequest } from "../api/comps";
 
 const CompContext = createContext();
 
@@ -51,6 +51,10 @@ export function CompProvider({ children }) {
         }
     }
 
+    const getComp = async (id) => {
+        const res = await getCompRequest(id);
+    };
+
     return (
         <CompContext.Provider
             value={{
@@ -58,6 +62,7 @@ export function CompProvider({ children }) {
                 createComp,
                 getComps,
                 deleteComp,
+                getComp,
             }}>
             {children}
         </CompContext.Provider>

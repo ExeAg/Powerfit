@@ -1,11 +1,19 @@
 import { useForm } from "react-hook-form"
 import { useComps } from "../context/CompsContext"
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useEffect } from "react";
 
 function CompFormPage() {
   const { register, handleSubmit } = useForm();
-  const { createComp } = useComps();
+  const { createComp, getComp } = useComps();
   const navigate = useNavigate();
+  const params = useParams();
+
+  useEffect(() => {
+    if (params.id) {
+      getComp(params.id)
+    }
+  }, [])
 
   const onSubmit = handleSubmit((data) => {
     createComp(data);

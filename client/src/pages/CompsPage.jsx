@@ -124,7 +124,7 @@ function CompsPage() {
             >
               Borrar
             </button>
-            <Link to={`/editar/${comp._id}`} className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md">
+            <Link to={`/comps/${comp._id}`} className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md">
               Editar
             </Link>
           </div>

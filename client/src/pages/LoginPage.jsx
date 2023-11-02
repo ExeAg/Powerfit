@@ -21,7 +21,7 @@ function LoginPage() {
     if (isAuthenticated) {
       // Realiza un enrutamiento condicional según el 'role' del usuario
       if (role === "Admin") {
-        navigate("/tasks");
+        navigate("/admin");
       } else if (role === "Alumno") {
         navigate("/Alumn");
       } else if (role === "Profesor") {

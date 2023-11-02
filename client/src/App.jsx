@@ -30,12 +30,12 @@ function App() {
                 <Route path="/" element={<HomePage />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
-                <Route path="/chat" element={<ChatPage />} />
-                <Route path="/comps" element={<CompsPage />} />
-                <Route path="/add-comp" element={<CompFormPage />} />
-                <Route path="/comps/:id" element={<CompFormPage />} />
 
                 <Route element={<ProtectedRoute />}>
+                  <Route path="/chat" element={<ChatPage />} />
+                  <Route path="/comps" element={<CompsPage />} />
+                  <Route path="/add-comp" element={<CompFormPage />} />
+                  <Route path="/comps/:id" element={<CompFormPage />} />
                   <Route path="/tasks" element={<TasksPage />} />
                   <Route path="/add-task" element={<TaskFormPage />} />
                   <Route path="/tasks/:id" element={<TaskFormPage />} />

@@ -9,9 +9,10 @@ function ChatPage() {
 
   let username = '';
   //TODO: Ver de donde salen los user en null (probablemente esten en la DB)
-  if(user != null){
-    username = user.username
+  if (user != null) {
+    username = user.username;
   }
+
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
 
@@ -20,8 +21,8 @@ function ChatPage() {
       // console.log('Conectado a Socket.io');
       socket.emit('user_connected', username);
     });
-    socket.on('user_connected', (userName) => {
-      console.log('Este es el nombre del User:', userName);
+    socket.on('user_connected', (username) => {
+      console.log('Este es el nombre del User:', username);
     });
     socket.on("message", receiveMessage);
     return () => {
@@ -33,7 +34,9 @@ function ChatPage() {
     setMessages((prevMessages) => [message, ...prevMessages]);
 
   const handleSubmit = (event) => {
+    console.log("en el evento",user, )
     event.preventDefault();
+    console.log("en el evento2",user)
     const newMessage = {
       body: message,
       from: user.username,
@@ -42,6 +45,7 @@ function ChatPage() {
     setMessages((prevMessages) => [newMessage, ...prevMessages]);
     setMessage("");
     socket.emit("message", newMessage.body);
+    console.log(newMessage.form);
   };
 
   return (

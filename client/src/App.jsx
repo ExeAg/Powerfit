@@ -12,6 +12,7 @@ import ProfesorHomePage from "./pages/ProfesorHomePage";
 import ChatPage from "./pages/ChatPage";
 import CompFormPage from "./pages/CompFormPage";
 import CompsPage from "./pages/CompsPage";
+import AdminPage from "./pages/AdminPage";
 
 import ProtectedRoute from "./ProtectedRoute";
 import { TaskProvider } from "./context/TasksContext";
@@ -31,6 +32,7 @@ function App() {
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
 
+
                 <Route element={<ProtectedRoute />}>
                   <Route path="/chat" element={<ChatPage />} />
                   <Route path="/comps" element={<CompsPage />} />
@@ -40,6 +42,7 @@ function App() {
                   <Route path="/add-task" element={<TaskFormPage />} />
                   <Route path="/tasks/:id" element={<TaskFormPage />} />
                   <Route path="/profile" element={<ProfilePage />} />
+                  <Route path="/admin" element={<AdminPage />} />
                   <Route path="/Alumn" element={<AlumnHomePage />} />
                   <Route path="/Profesor" element={<ProfesorHomePage />} />
                 </Route>

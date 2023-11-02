@@ -3,6 +3,8 @@
 @tailwind utilities;
 
 body { 
-  background: #202020;
+  background: url(/images/image.jpg);
+  background-repeat: no-repeat;
+  background-size: 100%;
   color: white
 }

@@ -25,8 +25,8 @@ function App() {
       <TaskProvider>
         <CompProvider>
           <BrowserRouter>
+            <Navbar />
             <main className="container mx-auto px-10">
-              <Navbar />
               <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/login" element={<LoginPage />} />

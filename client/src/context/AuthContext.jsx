@@ -1,5 +1,5 @@
 import { createContext, useState, useContext, useEffect } from "react";
-import { registerRequest, loginRequest, verifyTokenRequest } from "../api/auth";
+import { registerRequest, loginRequest, verifyTokenRequest, getUsersRequest, getUserRequest } from "../api/auth";
 import Cookies from 'js-cookie';
 export const AuthContext = createContext();
 
@@ -17,6 +17,29 @@ export const AuthProvider = ({ children }) => {
   const [errors, setErrors] = useState([]);
   const [loading, setLoading] = useState(true);
   const [role, setRole] = useState("");
+  const [users, setUsers] = useState([]);
+
+
+  const getUsers = async () => {
+    try {
+      const res = await getUsersRequest();
+      setUsers(res.data);
+      console.log(res.data)
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const getUser = async (id) => {
+    try {
+        const res = await getUserRequest(id);
+        console.log(res);
+        // setUser(res.data);
+        return res.data;
+    } catch (error) {
+        console.error(error);
+    }
+};  
 
   const signup = async (user) => {
     try {
@@ -100,8 +123,11 @@ export const AuthProvider = ({ children }) => {
         signup,
         signin,
         logout,
+        getUsers,
+        getUser,
         loading,
         user,
+        users,
         role,
         isAuthenticated,
         errors,

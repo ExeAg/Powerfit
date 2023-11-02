@@ -118,3 +118,18 @@ export const verifyToken = async (req, res) => {
     });
   });
 };
+
+export const getUsers = async (req, res) => {
+  try {
+    const users = await User.find(); // Consulta a la base de datos para obtener todos los usuarios
+    res.status(200).json(users); // Responde con la lista de usuarios en formato JSON
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const getUser = async (req, res) => {
+  const user = await User.findById(req.params.id);
+  if (!user) return res.status(404).json({ message: "user not found" });
+  res.json(user);
+};

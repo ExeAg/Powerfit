@@ -17,7 +17,9 @@ function TasksFormPage() {
     async function loadTask() {
       if (params.id) {
         const task = await getTask(params.id);
-        setValue("title", task.title);
+        setValue("nombre", task.nombre);
+        setValue("rutina", task.rutina);
+        setValue("cargo", task.cargo);
         setValue("description", task.description);
         setValue("date", dayjs(task.date).utc().format("YYYY-MM-DD"))
       }
@@ -44,14 +46,22 @@ function TasksFormPage() {
     <div className="flex h-[calc(100vh-100px)] items-center justify-center">
       <div className="bg-zinc-800 max-w-md w-full p-10 rounded-md">
         <form onSubmit={onSubmit}>
-          <label htmlFor="title">Title</label>
+
+          <label htmlFor="rutina">Rutina</label>
           <input
             type="text"
-            placeholder="Title"
-            {...register("title")}
+            placeholder="Rutina"
+            {...register("rutina")}
             className="w-full bg-zinc-700 text-white px-4 py-2 rounded-md my-2"
             autoFocus
           />
+
+          <select
+            {...register("cargo", { required: true })}
+            className="w-full bg-zinc-700 text-white px-4 py-2 rounded-md my-4">
+            <option value="Nutricionista">Nutricionista</option>
+            <option value="Preparador fisico">Preparador fisico</option>
+          </select>
 
           <label htmlFor="description">Description</label>
           <textarea

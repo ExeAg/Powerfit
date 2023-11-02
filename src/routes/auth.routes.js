@@ -24,6 +24,6 @@ router.get("/verify", verifyToken);
 
 router.get("/profile", authRequired, profile);
 
-router.get("/users", getUsers, getUser);
+router.get("/users", getUsers);
 
 export default router;

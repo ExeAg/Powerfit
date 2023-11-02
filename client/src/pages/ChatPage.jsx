@@ -5,7 +5,7 @@ import { useAuth } from "../context/AuthContext";
 const socket = io("http://127.0.0.1:4000");
 
 function ChatPage() {
-  const { isAuthenticated, logout, user } = useAuth();
+  const { isAuthenticated, user } = useAuth();
 
   let username = '';
   //TODO: Ver de donde salen los user en null (probablemente esten en la DB)
@@ -17,13 +17,13 @@ function ChatPage() {
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-    socket.on('connect', () => {
-      // console.log('Conectado a Socket.io');
-      socket.emit('user_connected', username);
-    });
-    socket.on('user_connected', (username) => {
-      console.log('Este es el nombre del User:', username);
-    });
+    // socket.on('connect', () => {
+    //   // console.log('Conectado a Socket.io');
+    //   socket.emit('user_connected', username);
+    // });
+    // socket.on('user_connected', (username) => {
+    //   console.log('Este es el nombre del User:', username);
+    // });
     socket.on("message", receiveMessage);
     return () => {
       socket.off("message", receiveMessage);

@@ -1,22 +1,21 @@
+import React from "react";
 import { Link } from "react-router-dom";
 
 function AlumnHomePage() {
   return (
-    <div>
-      <Link to={`/chat`} className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md">
+    <div className="flex flex-col items-center justify-center h-screen">
+      <h1 className="text-3xl mb-6 font-bold text-center">Página de Alumno</h1>
+      <Link to="/chat" className="btn btn-blue">
         Chat
       </Link>
-      <div>
-      <Link to={`/add-comp`} className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md">
-        Agregar Composición corporal
+      <Link to="/add-comp" className="btn btn-blue">
+        Agregar Composición Corporal
       </Link>
-      <div>
-      <Link to={`/comps`} className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md">
-        Ver Composiciones corporal
-      </Link></div>
-      </div>
-      </div>
-  )
+      <Link to="/comps" className="btn btn-blue">
+        Ver Composiciones Corporales
+      </Link>
+    </div>
+  );
 }
 
-export default AlumnHomePage
+export default AlumnHomePage;

@@ -3,7 +3,7 @@ import { useAuth } from "../context/AuthContext";
 
 function Navbar() {
   const { isAuthenticated, logout, user} = useAuth();
-    console.log(user)
+    
 
   return (
     <nav className="bg-green-700 my-3 flex justify-between py-5 px-10 rounded-lg">

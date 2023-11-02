@@ -1,15 +1,29 @@
 import { useEffect, useState } from "react";
 import io from "socket.io-client";
+import { useAuth } from "../context/AuthContext";
 
-const socket = io("/chat"); 
+const socket = io("http://127.0.0.1:4000");
 
 function ChatPage() {
+  const { isAuthenticated, logout, user } = useAuth();
+
+  let username = '';
+  //TODO: Ver de donde salen los user en null (probablemente esten en la DB)
+  if(user != null){
+    username = user.username
+  }
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
 
   useEffect(() => {
+    socket.on('connect', () => {
+      // console.log('Conectado a Socket.io');
+      socket.emit('user_connected', username);
+    });
+    socket.on('user_connected', (userName) => {
+      console.log('Este es el nombre del User:', userName);
+    });
     socket.on("message", receiveMessage);
-
     return () => {
       socket.off("message", receiveMessage);
     };
@@ -22,8 +36,9 @@ function ChatPage() {
     event.preventDefault();
     const newMessage = {
       body: message,
-      from: "YO",
+      from: user.username,
     };
+    // socket.on()
     setMessages((prevMessages) => [newMessage, ...prevMessages]);
     setMessage("");
     socket.emit("message", newMessage.body);
@@ -47,9 +62,8 @@ function ChatPage() {
           {messages.map((message, index) => (
             <li
               key={index}
-              className={`my-2 p-2 table text-sm rounded-md ${
-                message.from === "YO" ? "bg-sky-700 ml-auto" : "bg-black"
-              }`}
+              className={`my-2 p-2 table text-sm rounded-md ${message.from ? "bg-sky-700 ml-auto" : "bg-black"
+                }`}
             >
               <b>{message.from}</b>: {message.body}
             </li>

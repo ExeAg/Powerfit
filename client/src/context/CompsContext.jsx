@@ -52,7 +52,13 @@ export function CompProvider({ children }) {
     }
 
     const getComp = async (id) => {
-        const res = await getCompRequest(id);
+        try {
+            const res = await getCompRequest(id);
+            console.log(res);
+            return res.data;
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     return (

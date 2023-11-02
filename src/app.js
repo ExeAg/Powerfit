@@ -14,8 +14,8 @@ const app = express();
 
 //Middlewares
 app.use(cors({
-    origin: 'http://127.0.0.1:5173',
-    credentials: true
+  origin: 'http://127.0.0.1:5173',
+  credentials: true
 }));
 app.use(cookieParser());
 app.use(morgan("dev")); //dev es para que muestre un mensaje corto por console
@@ -29,14 +29,20 @@ app.use("/api", taskRoutes);
 app.use("/api", compRoutes);
 
 const server = http.createServer(app);
-const io = new SocketServer(server, {});
+const io = new SocketServer(server, {
+  cors: {
+    origin: "http://127.0.0.1:5173",
+    credentials: true
+  }
+});
 
 const connectedUsers = {}; // Un objeto para almacenar los nombres de usuario de usuarios conectados
 
 io.on("connection", (socket) => {
-  console.log(socket.id);
+  console.log("este id",socket.id);
 
   socket.on("user_connected", (userName) => {
+    console.log("Este es el nombre del User:",userName)
     connectedUsers[socket.id] = userName; // Asignar el nombre de usuario al socket.id
   });
 
@@ -55,6 +61,7 @@ io.on("connection", (socket) => {
     delete connectedUsers[socket.id];
   });
 });
+
 
 server.listen(PORT);
 console.log(`Server on port ${PORT}`);

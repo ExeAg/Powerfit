@@ -41,23 +41,23 @@ const connectedUsers = {}; // Un objeto para almacenar los nombres de usuario de
 io.on("connection", (socket) => {
   console.log("este id",socket.id);
 
-  socket.on("user_connected", (userName) => {
-    console.log("Este es el nombre del User:",userName)
-    connectedUsers[socket.id] = userName; // Asignar el nombre de usuario al socket.id
-  });
+  // socket.on("user_connected", (userName) => {
+  //   console.log("Este es el nombre del User:",userName)
+  //   connectedUsers[socket.id] = userName; // Asignar el nombre de usuario al socket.id
+  // });
 
   socket.on("message", (message) => {
-    // Obtener el nombre del usuario del objeto connectedUsers
+    
     const userName = connectedUsers[socket.id];
 
     socket.broadcast.emit("message", {
       body: message,
-      from: userName, // Utilizar el nombre del usuario
+      from: userName, 
     });
   });
 
   socket.on("disconnect", () => {
-    // Eliminar al usuario de connectedUsers cuando se desconecte
+    
     delete connectedUsers[socket.id];
   });
 });

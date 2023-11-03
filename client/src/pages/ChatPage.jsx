@@ -39,13 +39,13 @@ function ChatPage() {
     console.log("en el evento2",user)
     const newMessage = {
       body: message,
-      from: user.username,
+      from: username,
     };
+    console.log("name",username,"form",newMessage.from)
     // socket.on()
     setMessages((prevMessages) => [newMessage, ...prevMessages]);
     setMessage("");
-    socket.emit("message", newMessage.body);
-    console.log(newMessage.form);
+    socket.emit("message", newMessage.body, newMessage.from);
   };
 
   return (

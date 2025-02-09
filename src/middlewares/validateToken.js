@@ -1,3 +1,6 @@
+//----Esta carpeta se crea para poder decirles que rutas están protegidas por usuarios identificados.
+//-- Si está autenticado va a pasar, sino nos va a tirar error.
+
 import jwt from "jsonwebtoken";
 import { TOKEN_SECRET } from "../config.js";
 

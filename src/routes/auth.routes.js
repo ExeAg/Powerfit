@@ -1,3 +1,5 @@
+//-----------Son la URL del backend. En carpeta routes se definen todas las rutas que el front va a pedir
+
 import { Router } from "express";
 import {
   login,

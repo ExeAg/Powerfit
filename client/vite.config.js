@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/socket.io': {
+      '/socket.io': { //------ El chat ----------
         target: 'ws://localhost:4000',
         ws: true,
       },

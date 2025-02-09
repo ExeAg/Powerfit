@@ -1,8 +1,12 @@
+//--- Configura el codigo del backend
+//----Inicializamos express
+
 import express from "express";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
 import authRoutes from "./routes/auth.routes.js";
 import taskRoutes from "./routes/tasks.routes.js"
+import compositionRoutes from "./routes/compositions.routes.js"
 import cors from 'cors'
 import http from "http";
 import { Server as SocketServer } from "socket.io";
@@ -13,7 +17,7 @@ const app = express();
 
 //Middlewares
 app.use(cors({
-    origin: 'http://127.0.0.1:5173',
+    origin: 'http://localhost:5173',
     credentials: true
 }));
 app.use(cookieParser());
@@ -25,11 +29,13 @@ app.use(express.static(resolve("/")));
 //Rutas
 app.use("/api", authRoutes); //para que todas las authRoutes empiecen con /api
 app.use("/api", taskRoutes);
+app.use("/api", compositionRoutes);
 
 const server = http.createServer(app);
 const io = new SocketServer(server, {});
 
 const connectedUsers = {}; // Un objeto para almacenar los nombres de usuario de usuarios conectados
+
 
 io.on("connection", (socket) => {
   console.log(socket.id);

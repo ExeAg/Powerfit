@@ -1,3 +1,5 @@
+//-- Arranque de la aplicación
+
 import app from "./app.js";
 import { connectDB } from "./db.js";
 

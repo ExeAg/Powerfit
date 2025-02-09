@@ -1,3 +1,5 @@
+//---- Valida autentificaciones, si yo no espero un tipo de dato, largo un error.
+
 import { z } from "zod";
 
 export const registerSchema = z.object({
@@ -18,9 +20,7 @@ export const registerSchema = z.object({
     .min(6, {
       message: "La contraseña debe contener al menos 6 caracteres",
     }),
-  fullname: z.string({
-    required_error: "El nombre completo es requerido",
-  }),
+  
   age: z
     .string({
       required_error: "La edad es requerida",

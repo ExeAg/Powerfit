@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import io from "socket.io-client";
 
-const socket = io("/chat"); 
+const socket = io("/");
+
+
 
 function ChatPage() {
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
+  
 
   useEffect(() => {
     socket.on("message", receiveMessage);
@@ -14,6 +17,7 @@ function ChatPage() {
       socket.off("message", receiveMessage);
     };
   }, []);
+  
 
   const receiveMessage = (message) =>
     setMessages((prevMessages) => [message, ...prevMessages]);
@@ -30,9 +34,10 @@ function ChatPage() {
   };
 
   return (
-    <div className="h-screen bg-zinc-800 text-white flex items-center justify-center">
+    <div className="bg-image bg-cover flex flex-col items-center justify-center min-h-screen"
+    style={{ backgroundImage: `url(/images/imagenParaPagina.jpg)` }}>
       <form onSubmit={handleSubmit} className="bg-zinc-900 p-10">
-        <h1 className="text-2xl font-bold my-2">Chat con Profesional</h1>
+        <h1 className="text-2xl font-bold my-2">Chat comunicacional</h1>
         <input
           name="message"
           type="text"
@@ -48,7 +53,7 @@ function ChatPage() {
             <li
               key={index}
               className={`my-2 p-2 table text-sm rounded-md ${
-                message.from === "YO" ? "bg-sky-700 ml-auto" : "bg-black"
+                message.from === "YO" ? "bg-green-950 ml-auto" : "bg-black"
               }`}
             >
               <b>{message.from}</b>: {message.body}

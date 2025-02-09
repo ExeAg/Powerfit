@@ -1,27 +1,51 @@
 {
   "name": "powerfit",
   "version": "1.0.0",
-  "description": "",
+  "description": "Proyecto de 3año de programación",
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/index.js",
+    "test": "jest",
+    "show-config": "cross-env BABEL_SHOW_CONFIG_FOR=C:\\Users\\Brunox\\Desktop\\Luis\\Powerfit\\client\\test\\Taskcard.test.js jest --showConfig"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@testing-library/user-event": "^13.5.0",
     "bcryptjs": "^2.4.3",
+    "chart.js": "^4.4.3",
+    "chartjs-adapter-date-fns": "^3.0.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
-    "express": "^4.18.2",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^7.5.1",
+    "mongoose": "^7.7.0",
     "morgan": "^1.10.0",
-    "socket.io": "^4.7.2",
-    "zod": "^3.22.2"
+    "react-chartjs-2": "^5.2.0",
+    "socket.io": "^4.7.5",
+    "tailwind": "^4.0.0",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
-    "nodemon": "^3.0.1"
+    "@babel/core": "^7.24.9",
+    "@babel/preset-env": "^7.25.0",
+    "@babel/preset-react": "^7.24.7",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "autoprefixer": "^10.4.16",
+    "babel-jest": "^29.7.0",
+    "cross-env": "^7.0.3",
+    "dayjs": "^1.11.12",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "nodemon": "^3.1.4",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^3.3.5",
+    "webpack": "^5.92.1",
+    "webpack-cli": "^5.1.4"
   }
 }

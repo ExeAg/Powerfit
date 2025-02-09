@@ -1,9 +1,13 @@
-import { text } from "express";
+
 import mongoose from "mongoose";
 
 const taskSchema = new mongoose.Schema(
   {
     title: {
+      type: String,
+      required: true,
+    },
+    name: {
       type: String,
       required: true,
     },
@@ -18,7 +22,7 @@ const taskSchema = new mongoose.Schema(
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      require: true
+      required: true
     }
   },
   { timestamps: true }

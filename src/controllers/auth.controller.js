@@ -1,3 +1,5 @@
+//---------En esta carpeta se crean funciones para ejecutar el login
+
 import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 import { createAccessToken } from "../libs/jwt.js";
@@ -32,6 +34,7 @@ export const register = async (req, res) => {
       email: userSaved.email,
       fullname: userSaved.fullname,
       role: userSaved.role,
+      age: userSaved.age,
       createdAt: userSaved.createdAt,
       updatedAt: userSaved.updatedAt,
     });
@@ -67,6 +70,7 @@ export const login = async (req, res) => {
       email: userFound.email,
       fullname: userFound.fullname,
       role: userFound.role,
+      age: userFound.age,
       createdAt: userFound.createdAt,
       updatedAt: userFound.updatedAt,
     });
@@ -93,6 +97,7 @@ export const profile = async (req, res) => {
     username: userFound.username,
     email: userFound.email,
     role: userFound.role,
+    age: userFound.age,
     fullname: userFound.fullname,
     createdAt: userFound.createdAt,
     updatedAt: userFound.updatedAt,
@@ -113,6 +118,8 @@ export const verifyToken = async (req, res) => {
     return res.json({
       id: userFound._id,
       username: userFound.username,
+      fullname: userFound.fullname,
+      age: userFound.age,
       email: userFound.email,
       role: userFound.role,
     });

@@ -1,3 +1,5 @@
+//---- Esta es la conexión a la base de datos
+
 import mongoose from "mongoose";
 
 export const connectDB = async () => {

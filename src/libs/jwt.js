@@ -1,3 +1,5 @@
+//---- Se escribe codigo para usar varias veces, por ejemplo una función para crear tokens
+
 import jwt from "jsonwebtoken";
 import { TOKEN_SECRET } from "../config.js";
 
